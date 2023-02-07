@@ -15,11 +15,15 @@ inventoryWindow = nil
 inventoryPanel = nil
 inventoryButton = nil
 purseButton = nil
+soulLabel = nil
+capLabel = nil
 
 function init()
   connect(LocalPlayer, {
     onInventoryChange = onInventoryChange,
-    onBlessingsChange = onBlessingsChange
+    onBlessingsChange = onBlessingsChange,
+	onSoulChange = onSoulChange,
+    onFreeCapacityChange = onFreeCapacityChange
   })
   connect(g_game, { onGameStart = refresh })
 
@@ -31,7 +35,10 @@ function init()
   inventoryWindow = g_ui.loadUI('inventory', modules.game_interface.getRightPanel())
   inventoryWindow:disableResize()
   inventoryPanel = inventoryWindow:getChildById('contentsPanel')
-
+	
+  soulLabel = inventoryWindow:recursiveGetChildById('soulLabel')
+  capLabel = inventoryWindow:recursiveGetChildById('capLabel')
+  
   purseButton = inventoryPanel:getChildById('purseButton')
   local function purseFunction()
     local purse = g_game.getLocalPlayer():getInventoryItem(InventorySlotPurse)
@@ -48,7 +55,9 @@ end
 function terminate()
   disconnect(LocalPlayer, {
     onInventoryChange = onInventoryChange,
-    onBlessingsChange = onBlessingsChange
+    onBlessingsChange = onBlessingsChange,
+	onSoulChange = onSoulChange,
+    onFreeCapacityChange = onFreeCapacityChange
   })
   disconnect(g_game, { onGameStart = refresh })
 
@@ -121,4 +130,12 @@ function onBlessingsChange(player, blessings, oldBlessings)
   if hasAdventurerBlessing ~= Bit.hasBit(oldBlessings, Blessings.Adventurer) then
     toggleAdventurerStyle(hasAdventurerBlessing)
   end
+end
+
+function onSoulChange(localPlayer, soul)
+  soulLabel:setText(tr('Soul') .. ': ' .. soul)
+end
+
+function onFreeCapacityChange(player, freeCapacity)
+  capLabel:setText(tr('Cap') .. ': ' .. freeCapacity)
 end

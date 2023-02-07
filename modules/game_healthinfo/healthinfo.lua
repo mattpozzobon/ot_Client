@@ -22,8 +22,6 @@ healthBar = nil
 manaBar = nil
 energyBar = nil
 experienceBar = nil
-soulLabel = nil
-capLabel = nil
 healthTooltip = 'Your character health is %d out of %d.'
 manaTooltip = 'Your character mana is %d out of %d.'
 energyTooltip = 'Your character energy is %d out of %d.'
@@ -34,9 +32,8 @@ function init()
                          onManaChange = onManaChange,
 						 onEnergyChange = onEnergyChange,
                          onLevelChange = onLevelChange,
-                         onStatesChange = onStatesChange,
-                         onSoulChange = onSoulChange,
-                         onFreeCapacityChange = onFreeCapacityChange })
+                         onStatesChange = onStatesChange
+						 })
 
   connect(g_game, { onGameEnd = offline })
 
@@ -49,8 +46,6 @@ function init()
   manaBar = healthInfoWindow:recursiveGetChildById('manaBar')
   energyBar = healthInfoWindow:recursiveGetChildById('energyBar')
   experienceBar = healthInfoWindow:recursiveGetChildById('experienceBar')
-  soulLabel = healthInfoWindow:recursiveGetChildById('soulLabel')
-  capLabel = healthInfoWindow:recursiveGetChildById('capLabel')
 
   -- load condition icons
   for k,v in pairs(Icons) do
@@ -64,8 +59,6 @@ function init()
 	onEnergyChange(localPlayer, localPlayer:getEnergy(), localPlayer:getMaxEnergy())
     onLevelChange(localPlayer, localPlayer:getLevel(), localPlayer:getLevelPercent())
     onStatesChange(localPlayer, localPlayer:getStates(), 0)
-    onSoulChange(localPlayer, localPlayer:getSoul())
-    onFreeCapacityChange(localPlayer, localPlayer:getFreeCapacity())
   end
 
   healthInfoWindow:setup()
@@ -76,9 +69,8 @@ function terminate()
                             onManaChange = onManaChange,
 							onEnergyChange = onEnergyChange,
                             onLevelChange = onLevelChange,
-                            onStatesChange = onStatesChange,
-                            onSoulChange = onSoulChange,
-                            onFreeCapacityChange = onFreeCapacityChange })
+                            onStatesChange = onStatesChange
+							})
 
   disconnect(g_game, { onGameEnd = offline })
 
@@ -147,14 +139,6 @@ function onLevelChange(localPlayer, value, percent)
   experienceBar:setText(percent .. '%')
   experienceBar:setTooltip(tr(experienceTooltip, percent, value+1))
   experienceBar:setPercent(percent)
-end
-
-function onSoulChange(localPlayer, soul)
-  soulLabel:setText(tr('Soul') .. ': ' .. soul)
-end
-
-function onFreeCapacityChange(player, freeCapacity)
-  capLabel:setText(tr('Cap') .. ': ' .. freeCapacity)
 end
 
 function onStatesChange(localPlayer, now, old)
