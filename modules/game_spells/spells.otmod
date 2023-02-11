@@ -1,0 +1,9 @@
+Module
+  name: game_spells -- name of the module (generally the same name as the modules directory.
+  description: Display a players spells with their appropriate information -- description of the module explaining what it is.
+  author: BeniS -- names of the creators and contributors of the module.
+  website: www.otclient.info -- if you have an external website you can link it here.
+  sandboxed: true -- Sandboxing is a way of containing the modules variable and functions so that you do not have conflicts between other modules.
+  scripts: [ spells.lua ] -- The scripts is the logic behind the module where all the functions are contained.
+  @onLoad: init() -- this is where you define the initialization function of the module (we will cover this more later).
+  @onUnload: terminate() -- this is where you define the termination function of the module (we will cover this more later)

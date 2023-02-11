@@ -26,3 +26,19 @@ HeadlessWindow < UIWindow
 
 MainWindow < Window
   anchors.centerIn: parent
+
+Window2 < UIWindow
+  font: verdana-11px-antialised
+  size: 200 200
+  opacity: 1
+  color: #dfdfdf
+  text-offset: 0 6
+  text-align: top
+  image-source: /images/ui/window2
+  image-border: 6
+  image-border-top: 27
+  padding-top: 36
+  padding-left: 16
+  padding-right: 16
+  padding-bottom: 16
+  anchors.centerIn: parent

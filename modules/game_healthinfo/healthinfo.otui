@@ -35,9 +35,8 @@ ExperienceBar < ProgressBar
 
 ConditionWidget < UIWidget
   size: 18 18
-
   $!first:
-    margin-left: 2
+    margin-left: 10
 
 MiniWindow
   icon: /images/topbuttons/healthinfo

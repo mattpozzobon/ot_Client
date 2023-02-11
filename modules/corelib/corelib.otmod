@@ -6,12 +6,12 @@ Module
   reloadable: false
 
   @onLoad: |
+    dofile 'json'
     dofile 'math'
     dofile 'string'
     dofile 'table'
     dofile 'bitwise'
     dofile 'struct'
-
     dofile 'const'
     dofile 'util'
     dofile 'globals'
@@ -20,9 +20,7 @@ Module
     dofile 'keyboard'
     dofile 'mouse'
     dofile 'net'
-
     dofiles 'classes'
     dofiles 'ui'
-
     dofile 'inputmessage'
     dofile 'outputmessage'
